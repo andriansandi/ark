@@ -40,9 +40,10 @@ func main() {
 
 	router := mux.NewRouter()
 	spa := spaHandler{staticPath: "./frontend/build", indexPath: "index.html"}
-	// router.Handle("/", index())
-	router.PathPrefix("/").Handler(spa)
-	router.Handle("/healthz", healthz())
+	// router.Handle("/hello", index())
+	// router.PathPrefix("/").Handler(spa)
+	router.NotFoundHandler = http.Handler(spa)
+	// router.Handle("/healthz", healthz())
 
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
@@ -114,29 +115,6 @@ func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// otherwise, use http.FileServer to serve the static dir
 	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
-}
-
-func index() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != "/" {
-			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-			return
-		}
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "Hello, World!")
-	})
-}
-
-func healthz() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if atomic.LoadInt32(&healthy) == 1 {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-	})
 }
 
 func logging(logger *log.Logger) func(http.Handler) http.Handler {
