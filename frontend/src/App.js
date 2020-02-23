@@ -15,7 +15,8 @@ import Users from './Users'
 import Contact from './Contact'
 
 // UI Components
-import { Button } from 'evergreen-ui'
+// import { Button } from 'evergreen-ui'
+import { Button } from "@blueprintjs/core"
 
 // UI Components
 import TopBar from './components/ui/TopBar'
@@ -26,7 +27,7 @@ class App extends React.Component {
       <AppWrapper className="edx-app">
         <TopBar />
         <h1>Home</h1>
-        <Button>Hello World!</Button>
+        <Button className="bp3-intent-primary">Hello World!</Button>
       </AppWrapper>
     )
   }
