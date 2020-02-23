@@ -1,30 +1,31 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { hydrate, render } from "react-dom";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import './index.css';
+
+// styles
+import 'reset-css';
+import "./index.css";
+
 import App from './App';
-import Users from './Users';
-import Contact from './Contact';
 import * as serviceWorker from './serviceWorker';
 
-const routing = (
-    <Router>
-      <div>
-        <Route path="/" component={App} />
-        <Route path="/users" component={Users} />
-        <Route path="/contact" component={Contact} />
-      </div>
-    </Router>
-  )
 
-// ReactDOM.render(routing, document.getElementById('root'));
+// const routing = (
+//     <Router>
+//       <div>
+//         <Route path="/" component={App} />
+//         <Route path="/users" component={Users} />
+//         <Route path="/contact" component={Contact} />
+//       </div>
+//     </Router>
+//   )
+
+// // ReactDOM.render(routing, document.getElementById('root'));
 
 const rootElement = document.getElementById("root");
 if (rootElement.hasChildNodes()) {
-  hydrate(routing, rootElement);
+  hydrate(<App />, rootElement);
 } else {
-  render(routing, rootElement);
+  render(<App />, rootElement);
 }
 
 // If you want your app to work offline and load faster, you can change
