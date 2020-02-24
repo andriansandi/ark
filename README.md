@@ -15,7 +15,7 @@ Running the server
 ```sh
 $ make serve
 ```
-Frontend will serve at http://localhost:1500 and the backend will serve at http://1501
+Frontend will serve at http://localhost:1500 and the backend will serve at http://localhost:1501
 
 Stop the server
 ```sh
