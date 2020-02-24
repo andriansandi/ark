@@ -1,4 +1,4 @@
-module github.com/edx
+module github.com/ark
 
 go 1.13
 
